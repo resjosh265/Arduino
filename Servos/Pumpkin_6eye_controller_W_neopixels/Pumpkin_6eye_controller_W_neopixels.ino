@@ -46,7 +46,7 @@ void setup() {
    lightStrip.begin();
    lightStrip.setPixelColor(1, 0, 255, 0); //GRB
    lightStrip.show();
-   lightStrip.setBrightness(255ki,);
+   lightStrip.setBrightness(255);
   
    Servo1.attach(servoPin1); 
    Servo2.attach(servoPin2); 
