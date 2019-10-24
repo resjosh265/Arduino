@@ -1,7 +1,7 @@
 #include <Servo.h> 
 
 int minDelay = 500;
-int maxDelay = 2000;
+int maxDelay = 5000;
 
 int minAngle = 30;
 int maxAngle = 140;
@@ -13,6 +13,20 @@ int servoPin4 = 5;
 int servoPin5 = 6;
 int servoPin6 = 7;
 int resetServoPin = 13;
+
+unsigned long servoStart1;
+unsigned long servoStart2;
+unsigned long servoStart3;
+unsigned long servoStart4;
+unsigned long servoStart5;
+unsigned long servoStart6;
+
+int servoWait1 = 0;
+int servoWait2 = 0;
+int servoWait3 = 0;
+int servoWait4 = 0;
+int servoWait5 = 0;
+int servoWait6 = 0;
 
 Servo Servo1; 
 Servo Servo2; 
@@ -30,44 +44,70 @@ void setup() {
    Servo5.attach(servoPin5); 
    Servo6.attach(servoPin6); 
    ResetServo.attach(resetServoPin); 
+
+   servoStart1 = millis();
 }
 void loop(){ 
-  moveEyeball1();
-  moveEyeball2();
-  moveEyeball3();
-  moveEyeball4();
-  moveEyeball5();
-  moveEyeball6();
+  moveEyeball1(millis());
+  moveEyeball2(millis());
+  //moveEyeball3();
+  //moveEyeball4();
+  //moveEyeball5();
+  //moveEyeball6();
 
   ResetServo.write(90);
 }
 
-void moveEyeball1(){
-  Servo1.write(random(minAngle, maxAngle)); 
-  delay(random(minDelay, maxDelay)); 
+void moveEyeball1(unsigned long currentTime){
+
+  if (currentTime >= servoStart1 + servoWait1){
+    Servo1.write(random(minAngle, maxAngle)); 
+    servoWait1 = random(minDelay, maxDelay);
+    servoStart1 = millis();
+  }
 }
 
-void moveEyeball2(){
-  Servo2.write(random(minAngle, maxAngle)); 
-  delay(random(minDelay, maxDelay)); 
+void moveEyeball2(unsigned long currentTime){
+
+  if (currentTime >= servoStart2 + servoWait2){
+    Servo2.write(random(minAngle, maxAngle)); 
+    servoWait2 = random(minDelay, maxDelay);
+    servoStart2 = millis();
+  }
 }
 
-void moveEyeball3(){
-  Servo3.write(random(minAngle, maxAngle)); 
-  delay(random(minDelay, maxDelay)); 
+void moveEyeball3(unsigned long currentTime){
+
+  if (currentTime >= servoStart3 + servoWait3){
+    Servo3.write(random(minAngle, maxAngle)); 
+    servoWait3 = random(minDelay, maxDelay);
+    servoStart3 = millis();
+  }
 }
 
-void moveEyeball4(){
-  Servo4.write(random(minAngle, maxAngle)); 
-  delay(random(minDelay, maxDelay)); 
+void moveEyeball4(unsigned long currentTime){
+
+  if (currentTime >= servoStart4 + servoWait4){
+    Servo4.write(random(minAngle, maxAngle)); 
+    servoWait4 = random(minDelay, maxDelay);
+    servoStart4 = millis();
+  }
 }
 
-void moveEyeball5(){
-  Servo5.write(random(minAngle, maxAngle)); 
-  delay(random(minDelay, maxDelay)); 
+void moveEyeball5(unsigned long currentTime){
+
+  if (currentTime >= servoStart5 + servoWait5){
+    Servo5.write(random(minAngle, maxAngle)); 
+    servoWait5 = random(minDelay, maxDelay);
+    servoStart5 = millis();
+  }
 }
 
-void moveEyeball6(){
-  Servo6.write(random(minAngle, maxAngle)); 
-  delay(random(minDelay, maxDelay)); 
+void moveEyeball6(unsigned long currentTime){
+
+  if (currentTime >= servoStart6 + servoWait6){
+    Servo6.write(random(minAngle, maxAngle)); 
+    servoWait6 = random(minDelay, maxDelay);
+    servoStart6 = millis();
+  }
 }
