@@ -1,4 +1,5 @@
 #include <Servo.h> 
+#include <Adafruit_NeoPixel.h>
 
 int minDelay = 500;
 int maxDelay = 5000;
@@ -36,7 +37,17 @@ Servo Servo5;
 Servo Servo6;
 Servo ResetServo;
 
+//Neopixels
+#define LedPin 9
+#define LedCount 25
+Adafruit_NeoPixel lightStrip = Adafruit_NeoPixel(LedCount, LedPin, NEO_GRB + NEO_KHZ800);
+
 void setup() { 
+   lightStrip.begin();
+   lightStrip.setPixelColor(1, 0, 255, 0); //GRB
+   lightStrip.show();
+   lightStrip.setBrightness(255ki,);
+  
    Servo1.attach(servoPin1); 
    Servo2.attach(servoPin2); 
    Servo3.attach(servoPin3); 
@@ -50,10 +61,12 @@ void setup() {
 void loop(){ 
   moveEyeball1(millis());
   moveEyeball2(millis());
-  //moveEyeball3();
-  //moveEyeball4();
-  //moveEyeball5();
-  //moveEyeball6();
+  moveEyeball3(millis());
+  moveEyeball4(millis());
+  moveEyeball5(millis());
+  moveEyeball6(millis());
+
+  lightController();
 
   ResetServo.write(90);
 }
@@ -110,4 +123,11 @@ void moveEyeball6(unsigned long currentTime){
     servoWait6 = random(minDelay, maxDelay);
     servoStart6 = millis();
   }
+}
+
+void lightController(){
+  for(int i=0; i < LedCount; i++){
+    lightStrip.setPixelColor(i, 0, 255, 0); //GRB
+  }
+  lightStrip.show();
 }
